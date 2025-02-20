@@ -1,92 +1,39 @@
-# TMR LIF Neuron on FPGA  
+# TMR Spiking Neural Network on FPGA (Q8.8 Fixed-Point)
 
-This project implements a **Triple Modular Redundancy (TMR)**-based **Leaky Integrate-and-Fire (LIF) neuron** on an FPGA. The design is written in **Verilog** and uses **Q8.8 fixed-point arithmetic** for efficient computations. The implementation is targeted for the **Spartan-3E Starter Kit** using **Xilinx ISE Design Suite**.
+This project implements a **Triple Modular Redundancy (TMR) Spiking Neural Network (SNN)** using the **Leaky Integrate-and-Fire (LIF) neuron model** on an **FPGA (Spartan-3E Starter Kit)**. The implementation uses **Q8.8 fixed-point arithmetic** for efficient hardware computation.
 
----
+## 📌 Project Overview
+- **Triple Modular Redundancy (TMR)** ensures fault tolerance by using three independent neurons and a majority voter.
+- **Leaky Integrate-and-Fire (LIF) Neuron Model** is implemented with fixed-point arithmetic.
+- **Fixed-Point Arithmetic (Q8.8 Format)** is used for efficient computation instead of floating-point operations.
+- **Designed for FPGA (Xilinx ISE Design Suite)** to be synthesized and tested on hardware.
 
-## 🚀 **Project Overview**
-- **Hardware:** Spartan-3E Starter Kit  
-- **Neuron Model:** Leaky Integrate-and-Fire (LIF)  
-- **Fault Tolerance:** Triple Modular Redundancy (TMR)  
-- **Computation Format:** Q8.8 Fixed-Point Arithmetic  
-- **Language:** Verilog HDL  
-- **Simulation & Synthesis:** Xilinx ISE Design Suite  
+## 🗂️ File Structure
 
----
+| File Name                | Description |
+|--------------------------|-------------|
+| `fixed_point_q8_8.v`      | Performs Q8.8 fixed-point arithmetic (addition, subtraction, multiplication). |
+| `lif_neuron_q8_8.v`      | Implements the LIF neuron model using fixed-point arithmetic. |
+| `tmr_lif_neuron.v`       | Implements Triple Modular Redundancy (TMR) for fault-tolerant neural computation. |
+| `tmr_lif_neuron_tb.v`    | Testbench for verifying the TMR LIF neuron functionality. |
 
-## 📂 **File Structure**
-```
-📂 TMR_LIF_Neuron
- ├── src/
- │   ├── tmr_lif_neuron.v      # TMR-based LIF neuron module
- │   ├── lif_neuron_q8_8.v     # Individual LIF neuron implementation
- │   ├── fixed_point_q8_8.v    # Fixed-point arithmetic functions
- ├── testbench/
- │   ├── tmr_lif_neuron_tb.v   # Testbench for simulation
- │   ├── waveforms.do          # ISim waveform script (if needed)
- ├── docs/
- │   ├── README.md             # Project documentation
- │   ├── Q8.8_format_explained.pdf  # Explanation of Q8.8 arithmetic
- └── README.md
-```
+## 🛠️ Setup Instructions
+### 1️⃣ Prerequisites
+- **Xilinx ISE Design Suite** (For synthesis and simulation)
+- **Spartan-3E Starter Kit** (Target FPGA hardware)
 
----
+### 2️⃣ Running the Simulation
+1. Open **Xilinx ISE Design Suite**.
+2. Create a new project and add the **Verilog source files**.
+3. Set `tmr_lif_neuron_tb.v` as the **top-level simulation module**.
+4. Run the **behavioral simulation** to verify the neuron model and TMR logic.
 
-## 🛠 **Setup & Usage**
-### **1️⃣ Prerequisites**
-- **Xilinx ISE Design Suite (for simulation & synthesis)**
-- **Spartan-3E Starter Kit (for FPGA implementation)**
+### 3️⃣ FPGA Synthesis & Implementation
+1. Assign appropriate **FPGA constraints (UCF file)**.
+2. Synthesize the design and generate the **bitstream (.bit file)**.
+3. Upload the bitstream to the **Spartan-3E FPGA**.
 
-### **2️⃣ Cloning the Repository**
-```bash
-git clone https://github.com/yourusername/TMR_LIF_Neuron.git
-cd TMR_LIF_Neuron
-```
-
----
-
-## 🔬 **Simulation on Xilinx ISE (ISim)**
-1. Open **Xilinx ISE Design Suite**
-2. Create a **New Project** and select **Spartan-3E Starter Kit**
-3. Add Verilog source files from `src/`
-4. Add testbench files from `testbench/`
-5. Set `tmr_lif_neuron_tb.v` as the **Top Module**
-6. Select **Behavioral Simulation**
-7. Click **Simulate Behavioral Model**
-8. View results in **ISim Waveform Viewer**
-
----
-
-## 🏗 **Synthesis & FPGA Implementation**
-1. Open **Xilinx ISE Design Suite**
-2. Select **Synthesize - XST**
-3. Click **Implement Design**
-4. Click **Generate Programming File**
-5. Connect the **Spartan-3E Starter Kit** via JTAG
-6. Open **iMPACT** and load the generated `.bit` file
-7. Program the FPGA and observe outputs
-
----
-
-## 🧪 **Testbench**
-The testbench (`tmr_lif_neuron_tb.v`) validates:
-✔ Correct spike generation  
-✔ Stable membrane potential computation  
-✔ Robust fault tolerance under bit-flips or deviations  
-
-To run the testbench:
-```bash
-vsim work.tmr_lif_neuron_tb
-run -all
-```
-Or directly simulate in **ISim** using the provided steps.
-
----
-
-## 📊 **Results**
-The testbench ensures:
-✔ Correct majority voting for neuron membrane potential  
-✔ Stable behavior under injected faults  
-✔ Correct spike output based on thresholding  
-
----
+## ✅ Verification & Testing
+- The testbench **`tmr_lif_neuron_tb.v`** provides test cases for fault-tolerant neural processing.
+- Ensure correct **spike generation** and **membrane potential updates**.
+- Validate majority voting under **fault scenarios**.
